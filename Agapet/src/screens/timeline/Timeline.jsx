@@ -17,6 +17,7 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
@@ -257,6 +258,22 @@ export const Timeline = () => {
     }
   });
 
+
+
+
+
+  const [refresh, setrefresh] = useState(false);
+  const pullMe = async () => {
+    setrefresh(true);
+    const resp = await axios.get(
+      `http://192.168.200.4:8000/timeline/adoptante/${userInfo.idAdoptante}`
+    );
+    setfasesTimeline(resp.data[0].fases); 
+    setTimeout(() => {
+      setrefresh(false);
+    }, 1000);
+  };
+
   return (
     <View style={style.fondo}>
       <View style={style.fondo3}>
@@ -328,7 +345,9 @@ export const Timeline = () => {
         </View>
       </View>
 
-      <ScrollView style={style.scrollStyle}>
+      <ScrollView style={style.scrollStyle}  refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
+        }>
         {/*BackGround*/}
         <ImageBackground style={style.imgFondo} source={path}>
           <View style={{ width: "100%", marginTop: "6%" }}>
