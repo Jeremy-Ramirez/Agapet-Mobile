@@ -14,8 +14,8 @@ export const PetContext = () => {
         
         const resp = await axios.get(`http://192.168.200.4:8000/mascota/usuario/${userInfo.idAdoptante}/`);
         setisLoading(false);
-        setPet(resp.data);
-        setClinic(resp?.data.vacunas);
+        setPet(resp?.data[0]);
+        setClinic(resp?.data[0].vacunas);
       } catch (error) {
         console.log(error);
       }
