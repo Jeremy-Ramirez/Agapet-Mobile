@@ -197,8 +197,8 @@ export const Timeline = () => {
   let Entrega = fasesTimeline.filter((e) => e.fase.nombre == "Entrega");
   let Seguimiento = fasesTimeline.filter((e) => e.fase.nombre == "Seguimiento");
 
-  console.log(Formulario[0]);
-  console.log(Formulario[0]?.fase.descripcion);
+  //console.log(Formulario[0]);
+  //console.log(Formulario[0]?.fase.descripcion);
  
 
   Formulario.forEach((e) => {
@@ -276,7 +276,10 @@ export const Timeline = () => {
 
   return (
     <View style={style.fondo}>
-      <View style={style.fondo3}>
+
+
+      {
+        !!pet?<View style={style.fondo3}>
         <View style={style.contenedorCaract}>
           <View style={style.caracte}>
             <View style={style.iconCaracte}>
@@ -297,7 +300,7 @@ export const Timeline = () => {
                 }}
               >
                 {" "}
-                ¡Hola {pet.nombre}!
+                Adopción de {pet.nombre}
               </Text>
               <View
                 style={{
@@ -344,7 +347,10 @@ export const Timeline = () => {
           </View>
         </View>
       </View>
+      :null
+      }
 
+      
       <ScrollView style={style.scrollStyle}  refreshControl={
           <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
         }>

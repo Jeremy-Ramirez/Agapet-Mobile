@@ -198,8 +198,6 @@ function StackPet() {
   );
 }
 
-
-
 function StackCursos() {
   return (
     <Stack.Navigator>
@@ -289,59 +287,7 @@ function MyTabs() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="book-education"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="StackRecompensa"
-        component={StackRecompensa}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="medal-outline"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="StackTimeline"
-        component={StackTimeline}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="faq"
-        component={Faq}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="question-circle-o" size={size} color={color} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-       name="Pet"
-       component={StackPet}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="paw" size={size} color={color} />
+            <FontAwesome name="graduation-cap" size={size} color={color} />
           ),
         }}
       />
@@ -356,6 +302,54 @@ function MyTabs() {
           ),
         }}
       />
+
+      <Tab.Screen
+        name="Pet"
+        component={StackPet}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="paw" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="faq"
+        component={Faq}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="question-circle-o" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="StackTimeline"
+        component={StackTimeline}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="analytics-outline" size={size} color={color} />
+          ),
+        }}
+      />
+
+      {/* 
+      <Tab.Screen
+        name="StackRecompensa"
+        component={StackRecompensa}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="medal-outline"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      /> */}
     </Tab.Navigator>
   );
 }

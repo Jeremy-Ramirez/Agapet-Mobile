@@ -16,6 +16,14 @@ import {PetContext} from '../../context/PetContext';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { AntDesign } from '@expo/vector-icons';
 
+import {
+    Ionicons,
+    FontAwesome5,
+    FontAwesome,
+    MaterialCommunityIcons,
+  } from "@expo/vector-icons";
+
+
 
 const {height,width}= Dimensions.get('window');
 
@@ -27,152 +35,178 @@ export const Pet = () => {
   
   return (
     <ScrollView>
-    <View style={style.fondo}>
-            <View style={style.backgroundContainer}>
-                <Image style={style.image} source={{uri: `${pet?.image64}`}}/>
-                <View style={style.fondo3}>
-                    <View style={{ marginTop: 20, marginLeft: 20 }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={style.sesion}>{pet.nombre}</Text>
-                            {
-                                pet.genero == 'H' ?
-                                (
-                                    <>
-                                    <Image style={style.imgIcon} source={require('../../../assets/female.png')}/>
-                                    </>
-                                ):
-                                (
-                                    <>
-                                    <Image style={style.imgIcon} source={require('../../../assets/male.png')}/>
-                                    </>
-                                )
-                            } 
-                        </View>
+
+        {!!pet?
+        <View style={style.fondo}>
+        <View style={style.backgroundContainer}>
+            <Image style={style.image} source={{uri: `${pet?.image64}`}}/>
+            <View style={style.fondo3}>
+                <View style={{ marginTop: 20, marginLeft: 20 }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={style.sesion}>{pet.nombre}</Text>
                         {
-                        /*<View style={style.editContenedor}>
-                            <Image style={style.imgIcon} source={require('../../../assets/edit.png')}/>
+                            pet.genero == 'H' ?
+                            (
+                                <>
+                                <Image style={style.imgIcon} source={require('../../../assets/female.png')}/>
+                                </>
+                            ):
+                            (
+                                <>
+                                <Image style={style.imgIcon} source={require('../../../assets/male.png')}/>
+                                </>
+                            )
+                        } 
+                    </View>
+                    {
+                    /*<View style={style.editContenedor}>
+                        <Image style={style.imgIcon} source={require('../../../assets/edit.png')}/>
+                    </View>
+                    <Text style={style.estadoMascota}>{pet.estado==="S"?'Disponible':'No Disponible'}</Text>
+                    */
+                    }
+                    <Text style={style.estadoMascota}>{pet.estado==="S"?'Disponible':'No Disponible'}</Text>
+                    <Text style={style.descripcionMascota}>{pet.descripcion}</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={style.containerCarac}>
+                        <Text> Edad</Text>
+                        <Text style={{ fontWeight: "bold" }}> {pet.edad} años</Text>
+                    </View>
+                    <View style={style.containerCarac}>
+                        <Text> Peso</Text>
+                        <Text style={{ fontWeight: "bold" }}> {pet.peso} Kg</Text>
+                    </View>
+                    <View style={style.containerCarac}>
+                        <Text> Comida</Text>
+                        <Text style={{ fontWeight: "bold" }}>{pet.comida}</Text>
+                    </View>
+                </View>
+                <View style={style.inputs}>
+                    <View style={{flex:1, flexDirection:"row", justifyContent:"space-between", gap:5}}>
+                    <View >
+                        <Button
+                            onPress={()=> navigation.navigate('Clinic')}
+                            color={"#5FAFB9"}
+                            margin={'2%'}
+                            title="Historial clínico"
+                        />
+                    </View>
+                    <View >
+            
+                        <Button
+                            onPress={()=> navigation.navigate('Timeline')}
+                            color={"#5FAFB9"}
+                            margin={'2%'}
+                            title="Proceso de adopción"
+                        />
+                    </View>
+
+                    </View>
+                    
+                </View>
+            </View>
+        </View>
+        {//<Spinner visible={isLoading} />
+        }
+        <View style={style.fondo2}>
+            <View style={style.contenedorCaract}>
+                <View style={style.caracte}>
+                    <View style={style.iconCaracte}>
+                        <Image style={style.imgIcon2}
+
+                            source={require('../../../assets/deportivo.png')}
+                        />
+                    </View>
+                    <View style={style.iconCaracte2}>
+                        <Text style={{ fontWeight: "bold" }}> Deportivo</Text>
+                        <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row' }}>
+                            {
+                                [... new Array(5)].map((star, index)=>{
+                                    <View key={index+1}></View>
+                                    return index < pet.deportivo ? 
+                                    <AntDesign name="star" size={15} color="gold" key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
+                                })
+                            }
                         </View>
-                        <Text style={style.estadoMascota}>{pet.estado==="S"?'Disponible':'No Disponible'}</Text>
-                        */
+                    </View>
+
+                </View>
+                <View style={style.caracte}>
+                    <View style={style.iconCaracte}>
+                        <Image style={style.imgIcon2}
+
+                            source={require('../../../assets/dog-playing.png')}
+                        />
+                    </View>
+                    <View style={style.iconCaracte2}>
+                        <Text style={{ fontWeight: "bold" }}> Juguetón</Text>
+                        <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row' }}>
+                        {
+                            [... new Array(5)].map((star, index)=>{
+                                <View key={index+1}></View>
+                                return index < pet.jugueton ? 
+                                <AntDesign name="star" size={15} color="gold" key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
+                            })
                         }
-                        <Text style={style.estadoMascota}>{pet.estado==="S"?'Disponible':'No Disponible'}</Text>
-                        <Text style={style.descripcionMascota}>{pet.descripcion}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                        <View style={style.containerCarac}>
-                            <Text> Edad</Text>
-                            <Text style={{ fontWeight: "bold" }}> {pet.edad} años</Text>
-                        </View>
-                        <View style={style.containerCarac}>
-                            <Text> Peso</Text>
-                            <Text style={{ fontWeight: "bold" }}> {pet.peso} Kg</Text>
-                        </View>
-                        <View style={style.containerCarac}>
-                            <Text> Comida</Text>
-                            <Text style={{ fontWeight: "bold" }}>{pet.comida}</Text>
-                        </View>
-                    </View>
-                    <View style={style.inputs}>
-                        <View style={style.boton}>
-                            <Button
-                                onPress={()=> navigation.navigate('Clinic')}
-                                color={"#5FAFB9"}
-                                margin={'2%'}
-                                title="Historial Clínico"
-                            />
                         </View>
                     </View>
                 </View>
             </View>
-            {//<Spinner visible={isLoading} />
-            }
-            <View style={style.fondo2}>
-                <View style={style.contenedorCaract}>
-                    <View style={style.caracte}>
-                        <View style={style.iconCaracte}>
-                            <Image style={style.imgIcon2}
+            <View style={style.contenedorCaract}>
+                <View style={style.caracte}>
+                    <View style={style.iconCaracte}>
+                        <Image style={style.imgIcon2}
 
-                                source={require('../../../assets/deportivo.png')}
-                            />
-                        </View>
-                        <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold" }}> Deportivo</Text>
-                            <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row' }}>
-                                {
-                                    [... new Array(5)].map((star, index)=>{
-                                        <View key={index+1}></View>
-                                        return index < pet.deportivo ? 
-                                        <AntDesign name="star" size={15} color="gold" key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
-                                    })
-                                }
-                            </View>
-                        </View>
-
+                            source={require('../../../assets/sociable.png')}
+                        />
                     </View>
-                    <View style={style.caracte}>
-                        <View style={style.iconCaracte}>
-                            <Image style={style.imgIcon2}
-
-                                source={require('../../../assets/dog-playing.png')}
-                            />
-                        </View>
-                        <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold" }}> Juguetón</Text>
-                            <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row' }}>
-                            {
-                                [... new Array(5)].map((star, index)=>{
-                                    <View key={index+1}></View>
-                                    return index < pet.jugueton ? 
-                                    <AntDesign name="star" size={15} color="gold" key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
-                                })
-                            }
-                            </View>
+                    <View style={style.iconCaracte2}>
+                        <Text style={{ fontWeight: "bold" }}> Sociable</Text>
+                        <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row'}}>
+                        {
+                            [... new Array(5)].map((star, index)=>{
+                                <View key={index+1}></View>
+                                return index < pet.sociable ? 
+                                <AntDesign name="star" size={15} color="gold"  key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
+                            })
+                        }
                         </View>
                     </View>
                 </View>
-                <View style={style.contenedorCaract}>
-                    <View style={style.caracte}>
-                        <View style={style.iconCaracte}>
-                            <Image style={style.imgIcon2}
+                <View style={style.caracte}>
+                    <View style={style.iconCaracte}>
+                        <Image style={style.imgIcon2}
 
-                                source={require('../../../assets/sociable.png')}
-                            />
-                        </View>
-                        <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold" }}> Sociable</Text>
-                            <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row'}}>
-                            {
-                                [... new Array(5)].map((star, index)=>{
-                                    <View key={index+1}></View>
-                                    return index < pet.sociable ? 
-                                    <AntDesign name="star" size={15} color="gold"  key={index}/> : <AntDesign name="staro" size={15} color="black" key={index}/>
-                                })
-                            }
-                            </View>
-                        </View>
+                            source={require('../../../assets/miedo.png')}
+                        />
                     </View>
-                    <View style={style.caracte}>
-                        <View style={style.iconCaracte}>
-                            <Image style={style.imgIcon2}
-
-                                source={require('../../../assets/miedo.png')}
-                            />
-                        </View>
-                        <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold" }}> Miedoso</Text>
-                            <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row'}}>
-                            {
-                                [... new Array(5)].map((star, index)=>{
-                                    return index < pet.miedoso ? 
-                                    <AntDesign name="star" size={15} color="gold" key={index} /> : <AntDesign name="staro" size={15} color="black" key={index}/>
-                                })
-                            }
-                            </View>
+                    <View style={style.iconCaracte2}>
+                        <Text style={{ fontWeight: "bold" }}> Miedoso</Text>
+                        <View style={{ alignItems: 'center', marginTop: 5, flexDirection: 'row'}}>
+                        {
+                            [... new Array(5)].map((star, index)=>{
+                                return index < pet.miedoso ? 
+                                <AntDesign name="star" size={15} color="gold" key={index} /> : <AntDesign name="staro" size={15} color="black" key={index}/>
+                            })
+                        }
                         </View>
                     </View>
                 </View>
             </View>
         </View>
+    </View>:
+    <View>
+        <View style={style.nomascota}>
+        <Text>Aún no tienen una mascota asignada</Text>
+        </View>
+        
+    </View>
+    
+    }
+
+
+        
         </ScrollView>
   )
 };
@@ -349,5 +383,16 @@ const style = StyleSheet.create({
       height: 30,
       width: 30,
       resizeMode: 'stretch'
+  },
+  nomascota:{
+    //paddingTop:100,
+    //paddingLeft:100
+    padding:100,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  opciones:{
+    display:"flex"
   }
+
 });

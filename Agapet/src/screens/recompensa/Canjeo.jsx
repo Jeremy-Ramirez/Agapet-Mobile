@@ -128,7 +128,7 @@ export const Canjeo = ({ route }) => {
                         </TouchableOpacity>
                         </View>
                         <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold", fontSize: width * 0.045, color: 'white' }}> ¡Hola {mascota.nombre}!</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: width * 0.045, color: 'white' }}> Adopción de {mascota.nombre}</Text>
                             <View style={{ flexDirection: "row", marginLeft: '2%', marginTop: '2%' }}>
                                 <Image style={style.imgIcon5}
 

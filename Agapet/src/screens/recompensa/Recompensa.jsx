@@ -151,7 +151,7 @@ export const Recompensa = () => {
 
                         </View>
                         <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold", fontSize: width * 0.038, color: 'white' }}> ¡Hola {pet.nombre}!</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: width * 0.038, color: 'white' }}> Adopción de {pet.nombre}</Text>
                             <View style={{ flexDirection: "row", marginLeft: '2%', marginTop: '2%' }}>
                                 <Image style={style.imgIcon5}
 

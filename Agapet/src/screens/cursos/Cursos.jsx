@@ -136,6 +136,8 @@ export const Cursos = () => {
     return (
         <View style={style.fondo}>
 
+        {
+            !!pet?
             <View style={style.fondo3}>
                 <View style={style.contenedorCaract}>
                     <View style={style.caracte}>
@@ -149,7 +151,7 @@ export const Cursos = () => {
 
                         </View>
                         <View style={style.iconCaracte2}>
-                            <Text style={{ fontWeight: "bold", fontSize: width * 0.038, color: 'white' }}> ¡Hola {pet.nombre}!</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: width * 0.038, color: 'white' }}> Adopción de {pet.nombre}</Text>
                             <View style={{ flexDirection: "row", marginLeft: '2%', marginTop: '2%' }}>
                                 <Image style={style.imgIcon5}
 
@@ -183,6 +185,12 @@ export const Cursos = () => {
 
                 </View>
             </View>
+            :null
+        }
+
+
+            
+
             <Text style={{ fontSize: width * 0.065, margin: '2%', fontWeight: "bold" }}> Cursos</Text>
             {
                 /*
