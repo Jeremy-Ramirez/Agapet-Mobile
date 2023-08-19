@@ -194,6 +194,13 @@ function StackPet() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="Timeline"
+        component={Timeline}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }

@@ -27,6 +27,13 @@ import { PetContext } from "../../context/PetContext";
 import { BottomPet } from "./BottomPet";
 import { caminocompleto } from "../../../assets/caminocompleto.png";
 
+import {
+  Ionicons,
+  FontAwesome5,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+
 const popupList = [
   {
     id: 1,
@@ -51,7 +58,6 @@ if (PixelRatio.get() <= 2) {
 }
 
 export const Timeline = () => {
-
   let popupRef = React.createRef();
 
   const onShowPopup = () => {
@@ -199,7 +205,6 @@ export const Timeline = () => {
 
   //console.log(Formulario[0]);
   //console.log(Formulario[0]?.fase.descripcion);
- 
 
   Formulario.forEach((e) => {
     if (e.estado == "A") {
@@ -258,17 +263,13 @@ export const Timeline = () => {
     }
   });
 
-
-
-
-
   const [refresh, setrefresh] = useState(false);
   const pullMe = async () => {
     setrefresh(true);
     const resp = await axios.get(
       `http://192.168.200.4:8000/timeline/adoptante/${userInfo.idAdoptante}`
     );
-    setfasesTimeline(resp.data[0].fases); 
+    setfasesTimeline(resp.data[0].fases);
     setTimeout(() => {
       setrefresh(false);
     }, 1000);
@@ -276,478 +277,519 @@ export const Timeline = () => {
 
   return (
     <View style={style.fondo}>
+      {!!pet ? (
+        <View style={style.fondo3}>
+          <View style={style.contenedorCaract}>
+            <View style={style.caracte}>
+              <View style={style.iconCaracte}>
+                <TouchableOpacity onPress={() => navigation.navigate("Pet")}>
+                  <Image
+                    style={style.imgIcon2}
+                    source={{ uri: `${pet.image64}` }}
+                  />
+                </TouchableOpacity>
+              </View>
 
-
-      {
-        !!pet?<View style={style.fondo3}>
-        <View style={style.contenedorCaract}>
-          <View style={style.caracte}>
-            <View style={style.iconCaracte}>
-              <TouchableOpacity onPress={() => navigation.navigate("Pet")}>
-                <Image
-                  style={style.imgIcon2}
-                  source={{ uri: `${pet.image64}` }}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={style.iconCaracte2}>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: width * 0.038,
-                  color: "white",
-                }}
-              >
-                {" "}
-                Adopción de {pet.nombre}
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginLeft: "2%",
-                  marginTop: "2%",
-                }}
-              >
-                <Image
-                  style={style.imgIcon5}
-                  source={require("../../../assets/coin.png")}
-                />
+              <View style={style.iconCaracte2}>
                 <Text
                   style={{
-                    fontSize: width * 0.03,
-                    marginTop: "2%",
-                    marginBottom: "2%",
-                    color: "yellow",
+                    fontWeight: "bold",
+                    fontSize: width * 0.038,
+                    color: "white",
                   }}
                 >
                   {" "}
-                  100 puntos
+                  Adopción de {pet.nombre}
                 </Text>
-              </View>
-            </View>
-            <View style={style.iconCaracte3}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup7}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "2%",
+                    marginTop: "2%",
+                  }}
+                >
                   <Image
-                    style={style.imgIcon6}
-                    source={require("../../../assets/notificacion.png")}
+                    style={style.imgIcon5}
+                    source={require("../../../assets/coin.png")}
                   />
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              <BottomNotification
-                title="¡Felicitaciones!"
-                estado="No iniciado"
-                ref={(target) => (popupRef7 = target)}
-                onTouchOutside={onClosePopup7}
-                data={popupList}
-              />
+                  <Text
+                    style={{
+                      fontSize: width * 0.03,
+                      marginTop: "2%",
+                      marginBottom: "2%",
+                      color: "yellow",
+                    }}
+                  >
+                    {" "}
+                    100 puntos
+                  </Text>
+                </View>
+              </View>
+              <View style={style.iconCaracte3}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup7}>
+                    <Image
+                      style={style.imgIcon6}
+                      source={require("../../../assets/notificacion.png")}
+                    />
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                <BottomNotification
+                  title="¡Felicitaciones!"
+                  estado="No iniciado"
+                  ref={(target) => (popupRef7 = target)}
+                  onTouchOutside={onClosePopup7}
+                  data={popupList}
+                />
+              </View>
             </View>
           </View>
         </View>
-      </View>
-      :null
-      }
+      ) : null}
 
-      
-      <ScrollView style={style.scrollStyle}  refreshControl={
-          <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
-        }>
-        {/*BackGround*/}
-        <ImageBackground style={style.imgFondo} source={path}>
-          <View style={{ width: "100%", marginTop: "6%" }}>
-            <View style={style.iconCaracte5d}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup6}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/perro.png")}
-                      />
-                    </View>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-left-bold"
-                      color={colorSeguimiento}
-                    />
-                    <Text
-                      style={{
-                        color: colorSeguimiento,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
-                    >
-                      {" "}
-                      Seguimiento
-                    </Text>
-
+      {!!pet ? (
+        <ScrollView
+          style={style.scrollStyle}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
+          }
+        >
+          {/*BackGround*/}
+          <ImageBackground style={style.imgFondo} source={path}>
+            <View style={{ width: "100%", marginTop: "6%" }}>
+              <View style={style.iconCaracte5d}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup6}>
                     <View
-                      style={{
-                        position: "absolute",
-                        alignSelf: "flex-end",
-                        paddingLeft: width * 0.1,
-                      }}
+                      style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                      {Seguimiento.map((Seguimiento) => {
-                        if (Seguimiento.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={Seguimiento.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              {Seguimiento.map((Seguimiento) => {
-                return (
-                  <BottomPopup
-                    key={Seguimiento.id}
-                    title="Seguimiento"
-                    estado={Seguimiento.estado}
-                    descripcion={Seguimiento[0]?.fase.descripcion}
-                    src={require("../../../assets/perro.png")}
-                    ref={(target) => (popupRef6 = target)}
-                    onTouchOutside={onClosePopup6}
-                    data={popupList}
-                  />
-                );
-              })}
-            </View>
-
-            {/*Entrega Mascota*/}
-            <View style={style.iconCaracte5i22}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup5}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text
-                      style={{
-                        color: colorEntrega,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
-                    >
-                      {" "}
-                      Entrega de mascota
-                    </Text>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-right-bold"
-                      color={colorEntrega}
-                    />
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/gatito.png")}
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/perro.png")}
+                        />
+                      </View>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-left-bold"
+                        color={colorSeguimiento}
                       />
-                    </View>
-                    <View
-                      style={{ position: "absolute", alignSelf: "flex-end" }}
-                    >
-                      {Entrega.map((Entrega) => {
-                        if (Entrega.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={Entrega.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              {Entrega.map((Entrega) => {
-                return (
-                  <BottomPopup
-                    key={Entrega.id}
-                    title="Entrega de mascota"
-                    estado={Entrega.estado}
-                    descripcion={Entrega[0]?.fase.descripcion}
-                    src={require("../../../assets/gatito.png")}
-                    ref={(target) => (popupRef5 = target)}
-                    onTouchOutside={onClosePopup5}
-                    data={popupList}
-                  />
-                );
-              })}
-            </View>
+                      <Text
+                        style={{
+                          color: colorSeguimiento,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Seguimiento
+                      </Text>
 
-            {/*Firma de contrato*/}
-            <View style={style.iconCaracte5d}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup4}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/acuerdo.png")}
-                      />
+                      <View
+                        style={{
+                          position: "absolute",
+                          alignSelf: "flex-end",
+                          paddingLeft: width * 0.1,
+                        }}
+                      >
+                        {Seguimiento.map((Seguimiento) => {
+                          if (Seguimiento.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={Seguimiento.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
                     </View>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-left-bold"
-                      color={colorContrato}
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                {Seguimiento.map((Seguimiento) => {
+                  return (
+                    <BottomPopup
+                      key={Seguimiento.id}
+                      title="Seguimiento"
+                      estado={Seguimiento.estado}
+                      descripcion={Seguimiento[0]?.fase.descripcion}
+                      src={require("../../../assets/perro.png")}
+                      ref={(target) => (popupRef6 = target)}
+                      onTouchOutside={onClosePopup6}
+                      data={popupList}
                     />
-                    <Text
-                      style={{
-                        color: colorContrato,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
-                    >
-                      {" "}
-                      Firma de contrato
-                    </Text>
-                    <View
-                      style={{
-                        position: "absolute",
-                        alignSelf: "flex-end",
-                        paddingLeft: width * 0.1,
-                      }}
-                    >
-                      {FirmaContrato.map((Contrato) => {
-                        if (Contrato.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={Contrato.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              {FirmaContrato.map((Contrato) => {
-                return (
-                  <BottomPopup
-                    key={Contrato.id}
-                    title="Firma de contrato"
-                    estado={Contrato.estado}
-                    descripcion={FirmaContrato[0]?.fase.descripcion}
-                    src={require("../../../assets/acuerdo.png")}
-                    ref={(target) => (popupRef4 = target)}
-                    onTouchOutside={onClosePopup4}
-                    data={popupList}
-                  />
-                );
-              })}
-            </View>
+                  );
+                })}
+              </View>
 
-            {/*Visita de domicilio */}
-            <View style={style.iconCaracte5i2}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup3}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text
-                      style={{
-                        color: colorVisita,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
+              {/*Entrega Mascota*/}
+              <View style={style.iconCaracte5i22}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup5}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                      {" "}
-                      Visita a domicilio
-                    </Text>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-right-bold"
-                      color={colorVisita}
-                    />
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/casa.png")}
+                      <Text
+                        style={{
+                          color: colorEntrega,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Entrega de mascota
+                      </Text>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-right-bold"
+                        color={colorEntrega}
                       />
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/gatito.png")}
+                        />
+                      </View>
+                      <View
+                        style={{ position: "absolute", alignSelf: "flex-end" }}
+                      >
+                        {Entrega.map((Entrega) => {
+                          if (Entrega.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={Entrega.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
                     </View>
-                    <View
-                      style={{
-                        position: "absolute",
-                        alignSelf: "flex-end",
-                        paddingLeft: width * 0.23,
-                      }}
-                    >
-                      {Visita.map((Visita) => {
-                        if (Visita.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={Visita.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              {Visita.map((Visita) => {
-                return (
-                  <BottomPopup
-                    key={Visita.id}
-                    title="Visita a domicilio"
-                    estado={Visita.estado}
-                    descripcion={Visita[0]?.fase.descripcion}
-                    ref={(target) => (popupRef3 = target)}
-                    src={require("../../../assets/casa.png")}
-                    onTouchOutside={onClosePopup3}
-                    data={popupList}
-                  />
-                );
-              })}
-            </View>
-
-            {/**Entrevista de whastapp */}
-            <View style={style.iconCaracte5d}>
-              <StatusBar barStyle="dark-content"></StatusBar>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup2}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/chat.png")}
-                      />
-                    </View>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-left-bold"
-                      color={colorEntrevista}
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                {Entrega.map((Entrega) => {
+                  return (
+                    <BottomPopup
+                      key={Entrega.id}
+                      title="Entrega de mascota"
+                      estado={Entrega.estado}
+                      descripcion={Entrega[0]?.fase.descripcion}
+                      src={require("../../../assets/gatito.png")}
+                      ref={(target) => (popupRef5 = target)}
+                      onTouchOutside={onClosePopup5}
+                      data={popupList}
                     />
-                    <Text
-                      style={{
-                        color: colorEntrevista,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
-                    >
-                      {" "}
-                      Entrevista WhatsApp
-                    </Text>
+                  );
+                })}
+              </View>
 
+              {/*Firma de contrato*/}
+              <View style={style.iconCaracte5d}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup4}>
                     <View
-                      style={{
-                        position: "absolute",
-                        alignSelf: "flex-end",
-                        paddingLeft: width * 0.1,
-                      }}
+                      style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                      {Entrevista.map((entrevista) => {
-                        if (entrevista.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={entrevista.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-
-              {Entrevista.map((entrevista) => {
-                return (
-                  <BottomPopup
-                    key={entrevista.id}
-                    title="Entrevista WhatsApp"
-                    estado={entrevista.estado}
-                    descripcion={Entrevista[0]?.fase.descripcion}
-                    src={require("../../../assets/chat.png")}
-                    ref={(target) => (popupRef2 = target)}
-                    //ref={popupRef2}
-                    onTouchOutside={onClosePopup2}
-                    data={popupList}
-                  />
-                );
-              })}
-            </View>
-            {/*Formulario*/}
-            <View style={style.iconCaracte5i}>
-              <SafeAreaView style={style.container2}>
-                <TouchableWithoutFeedback onPress={onShowPopup}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text
-                      style={{
-                        color: colorFormulario,
-                        fontSize: width * 0.035,
-                        marginBottom: "1%",
-                      }}
-                    >
-                      {" "}
-                      Formulario
-                    </Text>
-                    <Icon
-                      size={width * 0.05}
-                      name="arrow-right-bold"
-                      color={colorFormulario}
-                    />
-                    <View style={{ justifyContent: "center" }}>
-                      <Image
-                        style={style.imgIcon7}
-                        source={require("../../../assets/formulario-de-consentimiento-del-donante.png")}
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/acuerdo.png")}
+                        />
+                      </View>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-left-bold"
+                        color={colorContrato}
                       />
+                      <Text
+                        style={{
+                          color: colorContrato,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Firma de contrato
+                      </Text>
+                      <View
+                        style={{
+                          position: "absolute",
+                          alignSelf: "flex-end",
+                          paddingLeft: width * 0.1,
+                        }}
+                      >
+                        {FirmaContrato.map((Contrato) => {
+                          if (Contrato.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={Contrato.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
                     </View>
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                {FirmaContrato.map((Contrato) => {
+                  return (
+                    <BottomPopup
+                      key={Contrato.id}
+                      title="Firma de contrato"
+                      estado={Contrato.estado}
+                      descripcion={FirmaContrato[0]?.fase.descripcion}
+                      src={require("../../../assets/acuerdo.png")}
+                      ref={(target) => (popupRef4 = target)}
+                      onTouchOutside={onClosePopup4}
+                      data={popupList}
+                    />
+                  );
+                })}
+              </View>
+
+              {/*Visita de domicilio */}
+              <View style={style.iconCaracte5i2}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup3}>
                     <View
-                      style={{
-                        position: "absolute",
-                        alignSelf: "flex-end",
-                        paddingLeft: width * 0.23,
-                      }}
+                      style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                      {Formulario.map((formulario) => {
-                        if (formulario.estado == "A") {
-                          return (
-                            <Image
-                              style={style.imgIcon4}
-                              key={formulario.id}
-                              source={require("../../../assets/check.png")}
-                            />
-                          );
-                        }
-                      })}
+                      <Text
+                        style={{
+                          color: colorVisita,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Visita a domicilio
+                      </Text>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-right-bold"
+                        color={colorVisita}
+                      />
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/casa.png")}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          position: "absolute",
+                          alignSelf: "flex-end",
+                          paddingLeft: width * 0.23,
+                        }}
+                      >
+                        {Visita.map((Visita) => {
+                          if (Visita.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={Visita.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
                     </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </SafeAreaView>
-              {Formulario.map((formulario) => {
-                return (
-                  <BottomPopup
-                    key={formulario.id}
-                    title="Formulario"
-                    estado={formulario.estado}
-                    descripcion={Formulario[0]?.fase.descripcion}
-                    src={require("../../../assets/formulario-de-consentimiento-del-donante.png")}
-                    ref={(target) => (popupRef = target)}
-                    //ref={popupRef}
-                    onTouchOutside={onClosePopup}
-                    //data={popupList}
-                  />
-                );
-              })}
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                {Visita.map((Visita) => {
+                  return (
+                    <BottomPopup
+                      key={Visita.id}
+                      title="Visita a domicilio"
+                      estado={Visita.estado}
+                      descripcion={Visita[0]?.fase.descripcion}
+                      ref={(target) => (popupRef3 = target)}
+                      src={require("../../../assets/casa.png")}
+                      onTouchOutside={onClosePopup3}
+                      data={popupList}
+                    />
+                  );
+                })}
+              </View>
+
+              {/**Entrevista de whastapp */}
+              <View style={style.iconCaracte5d}>
+                <StatusBar barStyle="dark-content"></StatusBar>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup2}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/chat.png")}
+                        />
+                      </View>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-left-bold"
+                        color={colorEntrevista}
+                      />
+                      <Text
+                        style={{
+                          color: colorEntrevista,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Entrevista WhatsApp
+                      </Text>
+
+                      <View
+                        style={{
+                          position: "absolute",
+                          alignSelf: "flex-end",
+                          paddingLeft: width * 0.1,
+                        }}
+                      >
+                        {Entrevista.map((entrevista) => {
+                          if (entrevista.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={entrevista.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+
+                {Entrevista.map((entrevista) => {
+                  return (
+                    <BottomPopup
+                      key={entrevista.id}
+                      title="Entrevista WhatsApp"
+                      estado={entrevista.estado}
+                      descripcion={Entrevista[0]?.fase.descripcion}
+                      src={require("../../../assets/chat.png")}
+                      ref={(target) => (popupRef2 = target)}
+                      //ref={popupRef2}
+                      onTouchOutside={onClosePopup2}
+                      data={popupList}
+                    />
+                  );
+                })}
+              </View>
+              {/*Formulario*/}
+              <View style={style.iconCaracte5i}>
+                <SafeAreaView style={style.container2}>
+                  <TouchableWithoutFeedback onPress={onShowPopup}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text
+                        style={{
+                          color: colorFormulario,
+                          fontSize: width * 0.035,
+                          marginBottom: "1%",
+                        }}
+                      >
+                        {" "}
+                        Formulario
+                      </Text>
+                      <Icon
+                        size={width * 0.05}
+                        name="arrow-right-bold"
+                        color={colorFormulario}
+                      />
+                      <View style={{ justifyContent: "center" }}>
+                        <Image
+                          style={style.imgIcon7}
+                          source={require("../../../assets/formulario-de-consentimiento-del-donante.png")}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          position: "absolute",
+                          alignSelf: "flex-end",
+                          paddingLeft: width * 0.23,
+                        }}
+                      >
+                        {Formulario.map((formulario) => {
+                          if (formulario.estado == "A") {
+                            return (
+                              <Image
+                                style={style.imgIcon4}
+                                key={formulario.id}
+                                source={require("../../../assets/check.png")}
+                              />
+                            );
+                          }
+                        })}
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </SafeAreaView>
+                {Formulario.map((formulario) => {
+                  return (
+                    <BottomPopup
+                      key={formulario.id}
+                      title="Formulario"
+                      estado={formulario.estado}
+                      descripcion={Formulario[0]?.fase.descripcion}
+                      src={require("../../../assets/formulario-de-consentimiento-del-donante.png")}
+                      ref={(target) => (popupRef = target)}
+                      //ref={popupRef}
+                      onTouchOutside={onClosePopup}
+                      //data={popupList}
+                    />
+                  );
+                })}
+              </View>
             </View>
+          </ImageBackground>
+          <View style={{ height: height * 0.07 }}></View>
+        </ScrollView>
+      ) : (
+        <View style={{backgroundColor:"#F6F3F4"}}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "50%",
+              padding: 20,
+              gap: 5,
+              borderWidth: 1,
+              borderColor: "orange",
+              marginRight: 20,
+              marginLeft: 20,
+              borderRadius: 12,
+            }}
+          >
+            <MaterialCommunityIcons name="dog" size={22} color="#232323" />
+            <Text
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Aún no tienen una mascota asignada, por favor comuniquese con la
+              fundación.
+            </Text>
           </View>
-        </ImageBackground>
-        <View style={{ height: height * 0.07 }}></View>
-      </ScrollView>
+        </View>
+      )}
     </View>
   );
 };
@@ -1065,7 +1107,6 @@ const style = StyleSheet.create({
   },
 });
 
-
 /*
                         <View style={style.iconCaracte}>
                             <SafeAreaView style={style.container2}>
@@ -1085,7 +1126,6 @@ const style = StyleSheet.create({
 
                         </View>
                         */
-
 
 /*
 
